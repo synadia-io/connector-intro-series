@@ -1,6 +1,6 @@
 {
   "name": "General Dev Environment",
-  "image": "mcr.microsoft.com/devcontainers/ubuntu:latest",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {},
     "ghcr.io/devcontainers/features/go:1": {},
@@ -11,17 +11,25 @@
     "source=${localWorkspaceFolder}/workspace,target=/workspace,type=bind"
   ],
   "workspaceFolder": "/workspace",
-  "postCreateCommand": ".devcontainer/setup.sh",
+  "postCreateCommand": "./setup.sh",
+  "forwardPorts": [4321],
+  "portsAttributes": {
+    "4321": {
+      "label": "Astro Dev Server",
+      "onAutoForward": "openBrowser"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-python.python",
-        "ms-python.pylint",
         "golang.go",
         "ms-vscode.vscode-json",
         "ms-vscode.vscode-typescript-next"
       ]
     }
+  },
+  "remoteEnv": {
+    "GITHUB_ACCESS_TOKEN": ""
   },
   "remoteUser": "vscode"
 }
