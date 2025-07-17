@@ -11,7 +11,7 @@
     "source=${localWorkspaceFolder}/workspace,target=/workspace,type=bind"
   ],
   "workspaceFolder": "/workspace",
-  "postCreateCommand": "./setup.sh",
+  "postCreateCommand": "setup.sh",
   "forwardPorts": [4321],
   "portsAttributes": {
     "4321": {
