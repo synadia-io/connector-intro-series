@@ -5,7 +5,7 @@ echo "Installing Claude Code..."
 npm install -g @anthropic-ai/claude-code
 
 echo "Installing Taskfile..."
-sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
+curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b ~/.local/bin
 
 echo "Setting up workspace..."
 cd /workspace
