@@ -12,3 +12,6 @@ dist/
 # Cache and temp files
 .vscode/
 .DS_Store
+
+# Environment variables
+.env
