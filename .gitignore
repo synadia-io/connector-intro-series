@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Astro build outputs
+dist/
+.astro/
+
+# Logs
+*.log
+
+# Cache and temp files
+.vscode/
+.DS_Store
