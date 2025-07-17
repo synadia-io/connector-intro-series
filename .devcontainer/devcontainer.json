@@ -31,8 +31,9 @@
       ]
     }
   },
-  "remoteEnv": {
-    "GITHUB_ACCESS_TOKEN": ""
+  "containerEnv": {
+    "PRIVATE_STORYBLOK_KEY": "${localEnv:PRIVATE_STORYBLOK_KEY}",
+    "PUBLIC_STORYBLOK_PREVIEW": "yes"
   },
   "remoteUser": "vscode"
 }
