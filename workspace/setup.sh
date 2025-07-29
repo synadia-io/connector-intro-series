@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+echo "Installing basic tools..."
+sudo apt update
+sudo apt install -y telnet curl wget unzip
+
 echo "Installing Claude Code..."
 npm install -g @anthropic-ai/claude-code
 
@@ -8,10 +12,10 @@ echo "Installing Taskfile..."
 curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b ~/.local/bin
 
 echo "Installing NATS Server..."
-wget https://github.com/nats-io/nats-server/releases/download/v2.10.7/nats-server-v2.10.7-linux-amd64.zip
-unzip nats-server-v2.10.7-linux-amd64.zip
-sudo mv nats-server-v2.10.7-linux-amd64/nats-server /usr/local/bin/
-rm -rf nats-server-v2.10.7-linux-amd64*
+wget https://github.com/nats-io/nats-server/releases/download/v2.11.6/nats-server-v2.11.6-linux-amd64.tar.gz
+tar -xzf nats-server-v2.11.6-linux-amd64.tar.gz
+sudo mv nats-server-v2.11.6-linux-amd64/nats-server /usr/local/bin/
+rm -rf nats-server-v2.11.6-linux-amd64*
 
 echo "Installing NATS CLI..."
 wget https://github.com/nats-io/natscli/releases/download/v0.1.4/nats-0.1.4-linux-amd64.zip
