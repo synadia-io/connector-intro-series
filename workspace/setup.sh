@@ -7,8 +7,64 @@ npm install -g @anthropic-ai/claude-code
 echo "Installing Taskfile..."
 curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b ~/.local/bin
 
+echo "Installing NATS Server..."
+wget https://github.com/nats-io/nats-server/releases/download/v2.10.7/nats-server-v2.10.7-linux-amd64.zip
+unzip nats-server-v2.10.7-linux-amd64.zip
+sudo mv nats-server-v2.10.7-linux-amd64/nats-server /usr/local/bin/
+rm -rf nats-server-v2.10.7-linux-amd64*
+
+echo "Installing NATS CLI..."
+wget https://github.com/nats-io/natscli/releases/download/v0.1.4/nats-0.1.4-linux-amd64.zip
+unzip nats-0.1.4-linux-amd64.zip
+sudo mv nats-0.1.4-linux-amd64/nats /usr/local/bin/
+rm -rf nats-0.1.4-linux-amd64*
+
+echo "Creating NATS config directory..."
+mkdir -p /workspace/.nats
+
+echo "Creating basic NATS config..."
+cat > /workspace/.nats/nats.conf << 'EOF'
+# NATS Server Configuration
+
+# Client port
+port: 4222
+
+# HTTP monitoring port
+http_port: 8222
+
+# Logging
+log_file: "/workspace/.nats/nats.log"
+logtime: true
+debug: false
+trace: false
+
+# Limits
+max_connections: 64K
+max_control_line: 4KB
+max_payload: 1MB
+max_pending: 64MB
+
+# Authentication (uncomment to enable)
+# authorization {
+#   user: "admin"
+#   password: "password"
+# }
+
+# JetStream (uncomment to enable)
+# jetstream {
+#   store_dir: "/workspace/.nats/jetstream"
+#   max_memory_store: 1GB
+#   max_file_store: 10GB
+# }
+EOF
+
 echo "Setting up workspace..."
 cd /workspace
 echo "Dev environment ready! Clone your projects here."
+
+echo "NATS Server installed! Usage:"
+echo "  Start NATS: nats-server -c /workspace/.nats/nats.conf"
+echo "  Check status: nats server check"
+echo "  Monitor: http://localhost:8222"
 
 echo "Setup complete!"

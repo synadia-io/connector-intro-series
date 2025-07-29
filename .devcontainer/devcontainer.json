@@ -15,11 +15,19 @@
   ],
   "workspaceFolder": "/workspace",
   "postCreateCommand": "bash setup.sh",
-  "forwardPorts": [4321],
+  "forwardPorts": [4321, 4222, 8222],
   "portsAttributes": {
     "4321": {
       "label": "Astro Dev Server",
       "onAutoForward": "openBrowser"
+    },
+    "4222": {
+      "label": "NATS Server",
+      "onAutoForward": "silent"
+    },
+    "8222": {
+      "label": "NATS Monitoring",
+      "onAutoForward": "silent"
     }
   },
   "customizations": {
