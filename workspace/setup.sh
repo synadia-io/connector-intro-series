@@ -23,6 +23,16 @@ unzip nats-0.1.4-linux-amd64.zip
 sudo mv nats-0.1.4-linux-amd64/nats /usr/local/bin/
 rm -rf nats-0.1.4-linux-amd64*
 
+echo "Installing Synadia Connect..."
+# Clone, build, and install connect binary
+git clone https://github.com/synadia-io/connect.git /tmp/connect
+cd /tmp/connect
+task build
+task install  # Installs to ~/.local/bin
+cd /workspace
+rm -rf /tmp/connect
+echo "Connect installed to ~/.local/bin/connect"
+
 echo "Creating NATS config directory..."
 mkdir -p /workspace/.nats
 
@@ -61,6 +71,10 @@ max_pending: 64MB
 #   max_file_store: 10GB
 # }
 EOF
+
+echo "Setting up environment variables..."
+echo 'export EDITOR="code --wait"' >> ~/.bashrc
+echo 'export VISUAL="code --wait"' >> ~/.bashrc
 
 echo "Setting up workspace..."
 cd /workspace
