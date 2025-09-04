@@ -31,8 +31,6 @@
       ]
     }
   },
-  "containerEnv": {
-    "NATS_URL": "nats://localhost:4222"
-  },
+  "containerEnv": {},
   "remoteUser": "vscode"
 }

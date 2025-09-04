@@ -47,9 +47,37 @@ The container will automatically set up your complete development environment wi
 
 > ⚠️ **Security Note:** The `Credentials/` folder is gitignored. Never commit credentials to version control.
 
-### 3. Run the Publisher
+### 3. Configure NATS Context
 
-Once your credentials are in place, start the temperature data publisher:
+Set up a NATS context for easy connection management:
+
+```bash
+task nats-context
+```
+
+Or manually:
+```bash
+nats context add \
+   "NGS-Default-CLI" \
+   --server "tls://connect.ngs.global" \
+   --creds ./Credentials/NGS-Default-CLI.creds \
+   --select
+```
+
+This command:
+- Creates a context named "NGS-Default-CLI"
+- Configures it to use the NGS global server
+- Points to your credentials file
+- Selects it as the current context
+
+You can verify the context was created:
+```bash
+nats context ls
+```
+
+### 4. Run the Publisher
+
+Once your credentials and context are configured, start the temperature data publisher:
 
 ```bash
 task publisher
@@ -87,6 +115,7 @@ The dev container comes pre-configured with:
 | Command | Description |
 |---------|-------------|
 | `task deps` | Install Go dependencies |
+| `task nats-context` | Set up NATS context for NGS |
 | `task publisher` | Run the sample publisher |
 
 ## 🔧 Troubleshooting

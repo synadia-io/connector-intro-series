@@ -79,3 +79,13 @@ tasks:
     cmds:
       - task: deps-publisher
       - task: deps-server
+
+  nats-context:
+    desc: Set up NATS context for NGS
+    cmds:
+      - |
+        nats context add \
+          "NGS-Default-CLI" \
+          --server "tls://connect.ngs.global" \
+          --creds ./Credentials/NGS-Default-CLI.creds \
+          --select
