@@ -35,15 +35,15 @@ git clone https://github.com/synadia-io/connect.git /tmp/connect
 cd /tmp/connect
 task build
 task install  # Installs to ~/.local/bin
-cd /workspace
+cd /workspaces/connector-intro-series
 rm -rf /tmp/connect
 echo "Connect installed to ~/.local/bin/connect"
 
 echo "Creating NATS config directory..."
-mkdir -p /workspace/.nats
+mkdir -p /workspaces/connector-intro-series/.nats
 
 echo "Creating basic NATS config..."
-cat > /workspace/.nats/nats.conf << 'EOF'
+cat > /workspaces/connector-intro-series/.nats/nats.conf << 'EOF'
 # NATS Server Configuration
 
 # Client port
@@ -53,7 +53,7 @@ port: 4222
 http_port: 8222
 
 # Logging
-log_file: "/workspace/.nats/nats.log"
+log_file: "/workspaces/connector-intro-series/.nats/nats.log"
 logtime: true
 debug: false
 trace: false
@@ -72,7 +72,7 @@ max_pending: 64MB
 
 # JetStream (uncomment to enable)
 # jetstream {
-#   store_dir: "/workspace/.nats/jetstream"
+#   store_dir: "/workspaces/connector-intro-series/.nats/jetstream"
 #   max_memory_store: 1GB
 #   max_file_store: 10GB
 # }
@@ -83,11 +83,11 @@ echo 'export EDITOR="code --wait"' >> ~/.bashrc
 echo 'export VISUAL="code --wait"' >> ~/.bashrc
 
 echo "Setting up workspace..."
-cd /workspace
+cd /workspaces/connector-intro-series
 echo "Dev environment ready! Clone your projects here."
 
 echo "NATS Server installed! Usage:"
-echo "  Start NATS: nats-server -c /workspace/.nats/nats.conf"
+echo "  Start NATS: nats-server -c /workspaces/connector-intro-series/.nats/nats.conf"
 echo "  Check status: nats server check"
 echo "  Monitor: http://localhost:8222"
 
