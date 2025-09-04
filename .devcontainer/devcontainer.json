@@ -10,17 +10,10 @@
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "mounts": [
-    "source=${localWorkspaceFolder}/workspace,target=/workspace,type=bind"
-  ],
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "postCreateCommand": "bash setup.sh",
-  "forwardPorts": [4321, 4222, 8222],
+  "forwardPorts": [4222, 8222],
   "portsAttributes": {
-    "4321": {
-      "label": "Astro Dev Server",
-      "onAutoForward": "openBrowser"
-    },
     "4222": {
       "label": "NATS Server",
       "onAutoForward": "silent"
@@ -34,14 +27,12 @@
     "vscode": {
       "extensions": [
         "golang.go",
-        "ms-vscode.vscode-json",
-        "ms-vscode.vscode-typescript-next"
+        "ms-vscode.vscode-json"
       ]
     }
   },
   "containerEnv": {
-    "PRIVATE_STORYBLOK_KEY": "${localEnv:PRIVATE_STORYBLOK_KEY}",
-    "PUBLIC_STORYBLOK_PREVIEW": "yes"
+    "NATS_URL": "nats://localhost:4222"
   },
   "remoteUser": "vscode"
 }

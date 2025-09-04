@@ -31,16 +31,17 @@ VS Code will prompt to "Reopen in Container" - click it and wait for setup.
 
 ## Structure
 ```
-DevEnvironment/
+DemoEnvironment/
 ├── .devcontainer/devcontainer.json
-├── workspace/              # Your projects go here
-└── setup.sh
+├── setup.sh
+└── [your-project-files]    # Your projects go here
 ```
 
 ## Usage
 ```bash
-# Inside devcontainer
-cd /workspace/your-project
+# Inside devcontainer, your repo is at:
+cd /workspaces/DemoEnvironment
+# Add your project files here
 npm run dev  # Port 4321 auto-forwards
 ```
 
