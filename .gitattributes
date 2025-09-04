@@ -1,4 +1,48 @@
+# Ensure consistent line endings
+* text=auto
+
+# Shell scripts should always use LF
 *.sh text eol=lf
+*.bash text eol=lf
+
+# Go files
+*.go text eol=lf
+*.mod text eol=lf
+*.sum text eol=lf
+
+# Configuration files
 *.json text eol=lf
-*.js text eol=lf
-*.ts text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.xml text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.txt text eol=lf
+README text eol=lf
+LICENSE text eol=lf
+
+# Docker
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+
+# Taskfile
+Taskfile.yaml text eol=lf
+Taskfile.yml text eol=lf
+
+# Git files
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Binary files (explicitly mark as binary)
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary

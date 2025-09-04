@@ -1,67 +1,110 @@
-# Development Environment
+# NATS Connector Dev Container
 
-General devcontainer for Node.js, Go, Git, and GitHub CLI development.
+A ready-to-use development container for working with NATS messaging and JetStream.
 
-## Setup
+## 🚀 Quick Start
 
-### 1. Clone and Open
+### 1. Open in Dev Container
+
+This project is designed to run in a VS Code Dev Container:
+
+1. **Install Prerequisites:**
+   - [VS Code](https://code.visualstudio.com/)
+   - [Docker Desktop](https://www.docker.com/products/docker-desktop)
+   - VS Code "Dev Containers" extension
+
+2. **Open the Container:**
+   - Clone this repository
+   - Open the folder in VS Code
+   - When prompted, click "Reopen in Container"
+   - Or use Command Palette (F1) → "Dev Containers: Reopen in Container"
+
+The container will automatically set up your complete development environment with Go, Node.js, Git, and all necessary tools.
+
+### 2. Add NATS Credentials
+
+**Important:** You need NATS credentials to connect to NGS (NATS Global Service).
+
+1. Get your credentials file from [Synadia NGS](https://app.ngs.global/) or your NATS administrator
+2. Place the `.creds` file in the `Credentials/` folder:
+   ```
+   Credentials/NGS-Default-CLI.creds
+   ```
+3. The credentials file should look something like:
+   ```
+   -----BEGIN NATS USER JWT-----
+   eyJ0eXAiOiJKV1QiLCJhbGc...
+   -----END NATS USER JWT-----
+
+   ************************* IMPORTANT *************************
+   NKEY Seed printed below can be used to sign and prove identity.
+   NKEYs are sensitive and should be treated as secrets.
+
+   -----BEGIN USER NKEY SEED-----
+   SUABC123...
+   -----END USER NKEY SEED-----
+   ```
+
+> ⚠️ **Security Note:** The `Credentials/` folder is gitignored. Never commit credentials to version control.
+
+### 3. Run the Publisher
+
+Once your credentials are in place, start the temperature data publisher:
+
 ```bash
-# From WSL2
-cd ~/Projects
-git clone https://github.com/phumulock/DevEnvironment.git
-cd DevEnvironment
-code .
+task publisher
 ```
 
-### 2. Environment Variables
-
-Set these in your WSL2 environment **before** opening the devcontainer:
-
+Or run directly:
 ```bash
-# Add to ~/.bashrc
-echo 'export PRIVATE_STORYBLOK_KEY="your-key-here"' >> ~/.bashrc
-source ~/.bashrc
-
-# Verify
-echo $PRIVATE_STORYBLOK_KEY
+cd Publisher
+go run main.go
 ```
 
-### 3. Open in Container
-VS Code will prompt to "Reopen in Container" - click it and wait for setup.
+## 📁 Project Structure
 
-## Structure
 ```
-DemoEnvironment/
-├── .devcontainer/devcontainer.json
-├── setup.sh
-└── [your-project-files]    # Your projects go here
-```
-
-## Usage
-```bash
-# Inside devcontainer, your repo is at:
-cd /workspaces/DemoEnvironment
-# Add your project files here
-npm run dev  # Port 4321 auto-forwards
+connector-intro-series/
+├── Credentials/           # Place your .creds file here (gitignored)
+│   └── NGS-Default-CLI.creds
+├── Publisher/             # Sample data publisher
+│   └── main.go
+├── Taskfile.yaml          # Task automation
+└── .devcontainer/         # Dev container configuration
 ```
 
-## Troubleshooting
+## 🛠️ What's Included
 
-**Environment variables not working:**
-```bash
-# Check if set in WSL2 host
-echo $PRIVATE_STORYBLOK_KEY
+The dev container comes pre-configured with:
+- **Go** - For NATS client development
+- **Node.js LTS** - For web-based tools and scripts
+- **Git & GitHub CLI** - Version control
+- **Task Runner** - Build automation
+- **NATS Ports** - 4222 (client), 8222 (monitoring)
 
-# If empty, add to ~/.bashrc and rebuild container
-```
+## 📝 Common Tasks
 
-**Slow performance:**
-- Make sure project is in WSL2 filesystem (`/home/rphum/Projects/`)
-- Avoid Windows filesystem (`/mnt/c/`)
+| Command | Description |
+|---------|-------------|
+| `task deps` | Install Go dependencies |
+| `task publisher` | Run the sample publisher |
 
-## Features
-- Node.js LTS + npm
-- Go development
-- Git + GitHub CLI
-- VS Code extensions pre-configured
-- Port forwarding (4321 for Astro)
+## 🔧 Troubleshooting
+
+### Credentials Not Found
+If you see `Credentials file not found`, ensure:
+1. Your `.creds` file is in the `Credentials/` folder
+2. The file is named exactly `NGS-Default-CLI.creds`
+3. The file has proper permissions
+
+### Connection Failed
+If connection fails:
+1. Check your credentials are valid and not expired
+2. Ensure you have internet connectivity
+3. Verify NGS service status at [status.ngs.global](https://status.ngs.global)
+
+## 🔗 Resources
+
+- [Get NGS Credentials](https://app.ngs.global/)
+- [NATS Documentation](https://docs.nats.io/)
+- [VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers)

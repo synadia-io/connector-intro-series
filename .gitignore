@@ -1,17 +1,61 @@
-# Dependencies
-node_modules/
-.pnpm-store/
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/bin/
+/pkg/
+/vendor/
 
-# Astro build outputs
-dist/
-.astro/
+# Go workspace files
+go.work
+go.work.sum
 
-# Logs
-*.log
-
-# Cache and temp files
+# IDE and editor files
 .vscode/
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
 
 # Environment variables
 .env
+.env.local
+*.env
+
+# Logs
+*.log
+logs/
+
+# NATS specific
+.nats/
+nats-server.conf.local
+
+# Credentials (never commit credentials!)
+Credentials/
+credentials/
+*.pem
+*.key
+*.crt
+*.p12
+
+# Task runner
+.task/
+
+# Local development
+.claude/
+*.local
+*.tmp
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Test coverage
+*.coverprofile
+coverage.txt
+coverage.html

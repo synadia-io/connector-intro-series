@@ -1,0 +1,81 @@
+version: '3'
+
+tasks:
+  publisher:
+    desc: Start the temperature publisher
+    dir: Publisher
+    deps: [deps-publisher]
+    cmds:
+      - go run publisher.go
+
+  server:
+    desc: Start the HTTP server
+    dir: Server
+    deps: [deps-server]
+    cmds:
+      - go run server.go
+
+  all:
+    desc: Run publisher, server, and ngrok simultaneously
+    deps: [deps-publisher, deps-server]
+    cmds:
+      - task: run-all-parallel
+
+  run-all-parallel:
+    desc: Internal task to run services in parallel
+    deps: []
+    cmds:
+      - |
+        echo "Starting all services..."
+        echo "Server will run on: http://localhost:8080"
+        echo "Ngrok will expose the server publicly"
+        echo ""
+        # Run all services in parallel
+        (cd Server && go run server.go) &
+        SERVER_PID=$!
+        (cd Publisher && go run publisher.go) &
+        PUBLISHER_PID=$!
+        ngrok http 8080 &
+        NGROK_PID=$!
+        
+        # Wait for any process to exit
+        wait $SERVER_PID $PUBLISHER_PID $NGROK_PID
+        
+        # Kill remaining processes on exit
+        trap "kill $SERVER_PID $PUBLISHER_PID $NGROK_PID 2>/dev/null" EXIT
+
+  deps-publisher:
+    desc: Install publisher dependencies
+    dir: Publisher
+    cmds:
+      - go mod download
+      - go mod tidy
+    sources:
+      - Publisher/go.mod
+      - Publisher/go.sum
+    generates:
+      - Publisher/go.sum
+    method: checksum
+
+  deps-server:
+    desc: Install server dependencies  
+    dir: Server
+    cmds:
+      - |
+        if [ ! -f go.mod ]; then
+          go mod init server
+        fi
+      - go mod download
+      - go mod tidy
+    sources:
+      - Server/go.mod
+      - Server/go.sum
+    generates:
+      - Server/go.sum
+    method: checksum
+
+  deps:
+    desc: Install all dependencies
+    cmds:
+      - task: deps-publisher
+      - task: deps-server

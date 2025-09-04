@@ -11,7 +11,7 @@
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "postCreateCommand": "bash setup.sh",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
   "forwardPorts": [4222, 8222],
   "portsAttributes": {
     "4222": {
