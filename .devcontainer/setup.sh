@@ -12,7 +12,7 @@ sudo apt update
 sudo apt install -y ngrok
 
 # echo "Installing Claude Code..."
-# npm install -g @anthropic-ai/claude-code
+npm install -g @anthropic-ai/claude-code
 
 echo "Installing Taskfile..."
 curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b ~/.local/bin
