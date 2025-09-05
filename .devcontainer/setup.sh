@@ -11,8 +11,8 @@ echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/
 sudo apt update
 sudo apt install -y ngrok
 
-# echo "Installing Claude Code..."
-# npm install -g @anthropic-ai/claude-code
+echo "Installing Claude Code..."
+npm install -g @anthropic-ai/claude-code
 
 echo "Installing Taskfile..."
 curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b ~/.local/bin

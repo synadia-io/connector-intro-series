@@ -31,6 +31,8 @@
       ]
     }
   },
-  "containerEnv": {},
+  "containerEnv": {
+    "EDITOR": "code --wait"
+  },
   "remoteUser": "vscode"
 }
