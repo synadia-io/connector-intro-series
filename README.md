@@ -105,7 +105,6 @@ connector-intro-series/
 
 The dev container comes pre-configured with:
 - **Go** - For NATS client development
-- **Node.js LTS** - For web-based tools and scripts
 - **Git & GitHub CLI** - Version control
 - **Task Runner** - Build automation
 - **NATS Ports** - 4222 (client), 8222 (monitoring)
