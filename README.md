@@ -2,6 +2,8 @@
 
 A ready-to-use development container for working with NATS messaging and JetStream.
 
+Just click *USE THIS TEMPLATE*
+
 ## 🚀 Quick Start
 
 ### 1. Open in Dev Container
