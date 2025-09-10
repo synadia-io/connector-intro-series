@@ -1,4 +1,4 @@
-# NATS Connector Dev Container
+# Connector Dev Container
 
 A ready-to-use development container for working with NATS messaging and JetStream.
 
@@ -23,9 +23,9 @@ The container will automatically set up your complete development environment wi
 
 ### 2. Add NATS Credentials
 
-**Important:** You need NATS credentials to connect to NGS (NATS Global Service).
+**Important:** You need credentials to connect to the Synadia Cloud.
 
-1. Get your credentials file from [Synadia NGS](https://app.ngs.global/) or your NATS administrator
+1. Get your credentials file from [Synadia Cloud](https://cloud.synadia.com) or your NATS administrator
 2. Place the `.creds` file in the `Credentials/` folder:
    ```
    Credentials/NGS-Default-CLI.creds
@@ -66,7 +66,7 @@ nats context add \
 
 This command:
 - Creates a context named "NGS-Default-CLI"
-- Configures it to use the NGS global server
+- Configures it to use Synadia Cloud global server
 - Points to your credentials file
 - Selects it as the current context
 
@@ -114,7 +114,7 @@ The dev container comes pre-configured with:
 | Command | Description |
 |---------|-------------|
 | `task deps` | Install Go dependencies |
-| `task nats-context` | Set up NATS context for NGS |
+| `task nats-context` | Set up NATS context for Synadia Cloud |
 | `task publisher` | Run the sample publisher |
 
 ## 🔧 Troubleshooting
@@ -129,10 +129,9 @@ If you see `Credentials file not found`, ensure:
 If connection fails:
 1. Check your credentials are valid and not expired
 2. Ensure you have internet connectivity
-3. Verify NGS service status at [status.ngs.global](https://status.ngs.global)
 
 ## 🔗 Resources
 
-- [Get NGS Credentials](https://app.ngs.global/)
+- [Get Synadia Cloud Credentials](https://cloud.synadia.com)
 - [NATS Documentation](https://docs.nats.io/)
 - [VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers)
