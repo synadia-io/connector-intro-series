@@ -1,4 +1,4 @@
-# > ⚠️ **Click USE THIS TEMPLATE**
+# ⚠️ **Click USE THIS TEMPLATE**
 
 # Connector Dev Container
 
