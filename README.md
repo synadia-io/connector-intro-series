@@ -1,8 +1,8 @@
+# > ⚠️ **Click USE THIS TEMPLATE**
+
 # Connector Dev Container
 
 A ready-to-use development container for working with NATS messaging and JetStream.
-
-Just click **USE THIS TEMPLATE**
 
 ## 🚀 Quick Start
 
