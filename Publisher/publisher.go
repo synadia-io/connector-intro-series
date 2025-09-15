@@ -22,7 +22,7 @@ type TemperatureReading struct {
 }
 
 func main() {
-	credsPath := filepath.Join("..", "Credentials", "NGS-Default-CLI.creds")
+	credsPath := filepath.Join("..", "Credentials", "NGS-Premium-CLI.creds")
 	natsURL := "tls://connect.ngs.global"
 	streamName := "Temperatures"
 	subject := "telemetry.sensors.temperature"

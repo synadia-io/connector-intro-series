@@ -15,6 +15,27 @@ tasks:
     cmds:
       - go run server.go
 
+  server-ngrok:
+    desc: Run server and ngrok simultaneously
+    deps: [deps-server]
+    cmds:
+      - |
+        echo "Starting server and ngrok..."
+        echo "Server will run on: http://localhost:8080"
+        echo "Ngrok will expose the server publicly"
+        echo ""
+        # Run server and ngrok in parallel
+        (cd Server && go run server.go) &
+        SERVER_PID=$!
+        ngrok http 8080 &
+        NGROK_PID=$!
+        
+        # Wait for any process to exit
+        wait $SERVER_PID $NGROK_PID
+        
+        # Kill remaining processes on exit
+        trap "kill $SERVER_PID $NGROK_PID 2>/dev/null" EXIT
+
   all:
     desc: Run publisher, server, and ngrok simultaneously
     deps: [deps-publisher, deps-server]
@@ -87,5 +108,5 @@ tasks:
         nats context add \
           "NGS-Default-CLI" \
           --server "tls://connect.ngs.global" \
-          --creds ./Credentials/NGS-Default-CLI.creds \
+          --creds ./Credentials/NGS-Premium-CLI.creds \
           --select
