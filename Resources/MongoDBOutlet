@@ -1,0 +1,22 @@
+description: MongoDB Outlet
+runtime_id: wombat
+steps:
+    consumer:
+        nats:
+            auth_enabled: true
+            jwt: 123.123.123-123-123
+            seed: 123
+            url: tls://connect.ngs.global
+        stream:
+            subject: telemetry.sensors.temperature
+    sink:
+        config:
+            collection: doc
+            database: sample
+            document_map: root = this
+            filter_map: ""
+            max_in_flight: 1024
+            operation: insert-one
+            upsert: false
+            url: mongodb+srv://peter:123@cluster0.123.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+        type: mongodb

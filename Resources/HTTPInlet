@@ -1,0 +1,55 @@
+description: HTTP Inlet
+runtime_id: wombat
+steps:
+    producer:
+        nats:
+            auth_enabled: true
+            jwt: 123.123.123-123-123
+            seed: 123
+            url: tls://connect.ngs.global
+        stream:
+            subject: http.inlet
+        threads: 1
+    source:
+        config:
+            auto_replay_nacks: true
+            backoff_on: []
+            basic_auth:
+                enabled: false
+                password: ""
+                username: ""
+            disable_http2: false
+            drop_empty_bodies: true
+            drop_on: []
+            dump_request_log_level: ""
+            extract_headers:
+                include_patterns: []
+                include_prefixes: []
+            follow_redirects: true
+            headers: {}
+            max_retry_backoff: 300s
+            metadata:
+                include_patterns: []
+                include_prefixes: []
+            oauth: {}
+            oauth2: {}
+            payload: ""
+            proxy_url: ""
+            retries: 3
+            retry_period: 1s
+            stream:
+                enabled: false
+                reconnect: true
+                scanner:
+                    lines: {}
+            successful_on: []
+            timeout: 0s
+            tls:
+                client_certs: []
+                enable_renegotiation: false
+                enabled: false
+                root_cas: ""
+                skip_cert_verify: false
+            url: https://123.ngrok-free.app/temperature
+            verb: GET
+        type: http_client

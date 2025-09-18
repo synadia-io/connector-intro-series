@@ -1,0 +1,19 @@
+description: MongoDB Inlet
+runtime_id: wombat
+steps:
+    producer:
+        nats:
+            auth_enabled: true
+            jwt: 123.123.123-123-123
+            seed: 123
+            url: tls://connect.ngs.global
+        stream:
+            subject: mongodb.inlet
+        threads: 1
+    source:
+        config:
+            auto_replay_nacks: true
+            collection: doc
+            database: sample
+            uri: mongodb+srv://peter:123@cluster0.123.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+        type: mongodb_change_stream

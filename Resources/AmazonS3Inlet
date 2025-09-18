@@ -1,0 +1,36 @@
+description: AmazonS3 Inlet
+runtime_id: wombat
+steps:
+    producer:
+        nats:
+            auth_enabled: true
+            jwt: 123.123.123-123-123
+            seed: 123
+            url: tls://connect.ngs.global
+        stream:
+            subject: amazons3.inlet
+        threads: 1
+    source:
+        config:
+            bucket: 123-synadia-bucket
+            credentials:
+                id: 123
+                secret: 123
+                token: ""
+            delete_objects: false
+            endpoint: ""
+            force_path_style_urls: false
+            prefix: ""
+            region: us-east-1
+            scanner:
+                lines: {}
+            sqs:
+                bucket_path: Records.*.s3.bucket.name
+                delay_period: ""
+                endpoint: ""
+                envelope_path: ""
+                key_path: Records.*.s3.object.key
+                max_messages: 10
+                url: https://sqs.us-east-1.amazonaws.com/123/S3Queue
+                wait_time_seconds: 20
+        type: aws_s3
