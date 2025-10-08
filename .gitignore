@@ -36,8 +36,6 @@ logs/
 nats-server.conf.local
 
 # Credentials (never commit credentials!)
-Credentials/*
-!Credentials/.gitkeep
 credentials/
 *.pem
 *.key

@@ -17,3 +17,11 @@ steps:
             database: sample
             uri: mongodb+srv://peter:123@cluster0.123.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
         type: mongodb_change_stream
+    transformer:
+        service:
+            endpoint: "temperature.analyze"
+            nats:
+            url: <nats server url>
+            auth_enabled: true
+            jwt: <jwt token>
+            seed: <seed>

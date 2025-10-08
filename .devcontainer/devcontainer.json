@@ -7,6 +7,9 @@
       "npmVersion": "latest"
     },
     "ghcr.io/devcontainers/features/go:1": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    },
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
@@ -27,6 +30,7 @@
     "vscode": {
       "extensions": [
         "golang.go",
+        "ms-python.python",
         "ms-vscode.vscode-json"
       ]
     }

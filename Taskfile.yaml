@@ -3,17 +3,41 @@ version: '3'
 tasks:
   publisher:
     desc: Start the temperature publisher
-    dir: Publisher
+    dir: publisher
     deps: [deps-publisher]
     cmds:
       - go run publisher.go
 
   server:
     desc: Start the HTTP server
-    dir: Server
+    dir: server
     deps: [deps-server]
     cmds:
       - go run server.go
+
+  temperature:
+    desc: Start the temperature microservice
+    dir: temperature-microservice
+    cmds:
+      - NATS_URL=tls://connect.ngs.global NATS_CREDS=../credentials/NGS-Premium-CLI.creds go run temperature-service.go
+
+  temperature-debug:
+    desc: Debug the temperature microservice with delve
+    dir: temperature-microservice
+    cmds:
+      - NATS_URL=tls://connect.ngs.global NATS_CREDS=../credentials/NGS-Premium-CLI.creds dlv debug temperature-service.go
+
+  http-temperature:
+    desc: Start the HTTP temperature microservice
+    dir: temperature-microservice
+    cmds:
+      - NATS_URL=tls://connect.ngs.global NATS_CREDS=../credentials/NGS-Premium-CLI.creds go run http-temperature-client.go
+
+  python-temperature:
+    desc: Start the Python temperature microservice
+    dir: temperature-microservice
+    cmds:
+      - NATS_URL=tls://connect.ngs.global NATS_CREDS=../credentials/NGS-Premium-CLI.creds python3 temperature_service.py
 
   server-ngrok:
     desc: Run server and ngrok simultaneously
@@ -25,7 +49,7 @@ tasks:
         echo "Ngrok will expose the server publicly"
         echo ""
         # Run server and ngrok in parallel
-        (cd Server && go run server.go) &
+        (cd server && go run server.go) &
         SERVER_PID=$!
         ngrok http 8080 &
         NGROK_PID=$!
@@ -52,9 +76,9 @@ tasks:
         echo "Ngrok will expose the server publicly"
         echo ""
         # Run all services in parallel
-        (cd Server && go run server.go) &
+        (cd server && go run server.go) &
         SERVER_PID=$!
-        (cd Publisher && go run publisher.go) &
+        (cd publisher && go run publisher.go) &
         PUBLISHER_PID=$!
         ngrok http 8080 &
         NGROK_PID=$!
@@ -67,20 +91,20 @@ tasks:
 
   deps-publisher:
     desc: Install publisher dependencies
-    dir: Publisher
+    dir: publisher
     cmds:
       - go mod download
       - go mod tidy
     sources:
-      - Publisher/go.mod
-      - Publisher/go.sum
+      - publisher/go.mod
+      - publisher/go.sum
     generates:
-      - Publisher/go.sum
+      - publisher/go.sum
     method: checksum
 
   deps-server:
     desc: Install server dependencies  
-    dir: Server
+    dir: server
     cmds:
       - |
         if [ ! -f go.mod ]; then
@@ -89,10 +113,10 @@ tasks:
       - go mod download
       - go mod tidy
     sources:
-      - Server/go.mod
-      - Server/go.sum
+      - server/go.mod
+      - server/go.sum
     generates:
-      - Server/go.sum
+      - server/go.sum
     method: checksum
 
   deps:
@@ -108,5 +132,5 @@ tasks:
         nats context add \
           "NGS-Default-CLI" \
           --server "tls://connect.ngs.global" \
-          --creds ./Credentials/NGS-Premium-CLI.creds \
+          --creds ./credentials/NGS-Premium-CLI.creds \
           --select

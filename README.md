@@ -28,9 +28,9 @@ The container will automatically set up your complete development environment wi
 **Important:** You need credentials to connect to the Synadia Cloud.
 
 1. Get your credentials file from [Synadia Cloud](https://cloud.synadia.com) or your NATS administrator
-2. Place the `.creds` file in the `Credentials/` folder:
+2. Place the `.creds` file in the `credentials/` folder:
    ```
-   Credentials/NGS-Default-CLI.creds
+   credentials/NGS-Default-CLI.creds
    ```
 3. The credentials file should look something like:
    ```
@@ -47,7 +47,7 @@ The container will automatically set up your complete development environment wi
    -----END USER NKEY SEED-----
    ```
 
-> ⚠️ **Security Note:** The `Credentials/` folder is gitignored. Never commit credentials to version control.
+> ⚠️ **Security Note:** The `credentials/` folder is gitignored. Never commit credentials to version control.
 
 ### 3. Configure NATS Context
 
@@ -62,7 +62,7 @@ Or manually:
 nats context add \
    "NGS-Default-CLI" \
    --server "tls://connect.ngs.global" \
-   --creds ./Credentials/NGS-Default-CLI.creds \
+   --creds ./credentials/NGS-Default-CLI.creds \
    --select
 ```
 
@@ -87,7 +87,7 @@ task publisher
 
 Or run directly:
 ```bash
-cd Publisher
+cd publisher
 go run main.go
 ```
 
@@ -95,9 +95,9 @@ go run main.go
 
 ```
 connector-intro-series/
-├── Credentials/           # Place your .creds file here (gitignored)
+├── credentials/           # Place your .creds file here (gitignored)
 │   └── NGS-Default-CLI.creds
-├── Publisher/             # Sample data publisher
+├── publisher/             # Sample data publisher
 │   └── main.go
 ├── Taskfile.yaml          # Task automation
 └── .devcontainer/         # Dev container configuration
@@ -123,7 +123,7 @@ The dev container comes pre-configured with:
 
 ### Credentials Not Found
 If you see `Credentials file not found`, ensure:
-1. Your `.creds` file is in the `Credentials/` folder
+1. Your `.creds` file is in the `credentials/` folder
 2. The file is named exactly `NGS-Default-CLI.creds`
 3. The file has proper permissions
 

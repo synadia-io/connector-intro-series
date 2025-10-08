@@ -22,7 +22,7 @@ type TemperatureReading struct {
 }
 
 func main() {
-	credsPath := filepath.Join("..", "Credentials", "NGS-Premium-CLI.creds")
+	credsPath := filepath.Join("..", "credentials", "NGS-Premium-CLI.creds")
 	natsURL := "tls://connect.ngs.global"
 	streamName := "Temperatures"
 	subject := "telemetry.sensors.temperature"
@@ -86,20 +86,24 @@ func main() {
 	publishReading := func() {
 		idx := rand.Intn(len(locations))
 
-		baseTemp := 22.0
-		if locations[idx] == "Server Room" {
-			baseTemp = 18.0
-		} else if locations[idx] == "Rooftop" {
-			baseTemp = 15.0
-		}
+		// Generate temperature based on desired distribution:
+		// 20% cold (<10°C), 60% warm (10-25°C), 20% hot (>25°C)
+		var temperature float64
+		randValue := rand.Float64()
 
-		variation := (rand.Float64() - 0.5) * 8
-		temperature := baseTemp + variation
+		switch {
+		case randValue < 0.2: // 20% cold temperatures
+			temperature = rand.Float64() * 10 // 0-10°C
+		case randValue < 0.8: // 60% warm temperatures
+			temperature = 10 + rand.Float64() * 15 // 10-25°C
+		default: // 20% hot temperatures
+			temperature = 25 + rand.Float64() * 15 // 25-40°C
+		}
 
 		reading := TemperatureReading{
 			SensorID:    sensorIDs[idx],
 			Temperature: temperature,
-			Unit:        "Celsius",
+			Unit:        "celsius",
 			Location:    locations[idx],
 			Timestamp:   time.Now(),
 		}

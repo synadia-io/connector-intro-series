@@ -82,6 +82,9 @@ echo "Setting up environment variables..."
 echo 'export EDITOR="code --wait"' >> ~/.bashrc
 echo 'export VISUAL="code --wait"' >> ~/.bashrc
 
+echo "Installing Python dependencies..."
+pip install -r /workspaces/connector-intro-series/temperature-microservice/requirements.txt
+
 echo "Setting up workspace..."
 cd /workspaces/connector-intro-series
 echo "Dev environment ready! Clone your projects here."
